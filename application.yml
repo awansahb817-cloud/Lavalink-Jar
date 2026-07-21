@@ -1,0 +1,77 @@
+server:
+  port: 8080
+  address: 0.0.0.0
+
+lavalink:
+  plugins:
+    # YouTube ka naya Anti-Block Plugin
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.11.4"
+      repository: "https://maven.lavalink.dev/releases"
+    # Spotify, Apple Music, Deezer support ke liye LavaSrc
+    - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.3.0"
+      repository: "https://maven.lavalink.dev/releases"
+    # Faltu Intro/Outro aur Ads skip karne ke liye SponsorBlock
+    - dependency: "com.github.topi314.sponsorblock:sponsorblock-plugin:3.0.1"
+      repository: "https://maven.lavalink.dev/releases"
+
+  server:
+    password: "lavalinkv4"
+    sources:
+      youtube: false # Ise false hi rakhna, kyunki upar plugin use kar rahe hain
+      bandcamp: true
+      soundcloud: true
+      twitch: true
+      vimeo: true
+      http: true
+      local: false
+    # Advanced Audio Filters (Bassboost, Nightcore wagara ke liye)
+    filters:
+      volume: true
+      equalizer: true
+      karaoke: true
+      timescale: true
+      tremolo: true
+      vibrato: true
+      distortion: true
+      rotation: true
+      channelMix: true
+      lowPass: true
+    bufferDurationMs: 400
+    youtubePlaylistLoadLimit: 50 # Ek playlist se max 50 gaane load honge
+    playerUpdateInterval: 5
+    youtubeSearchEnabled: true
+    soundcloudSearchEnabled: true
+
+# Plugins ki Settings Yahan Hai
+plugins:
+  lavasrc:
+    providers:
+      - "ytsearch:\"%ISRC%\""
+      - "ytsearch:%QUERY%"
+    sources:
+      spotify: false # Agar aapke paas Spotify Client ID/Secret hai toh ise 'true' karein
+      applemusic: true
+      deezer: true
+      yandexmusic: true
+    spotify:
+      clientId: "YOUR_SPOTIFY_CLIENT_ID" # Apni Spotify Developer ID yahan daalein
+      clientSecret: "YOUR_SPOTIFY_CLIENT_SECRET" # Apna Secret yahan daalein
+      countryCode: "US"
+    applemusic:
+      countryCode: "US"
+  
+  sponsorblock:
+    categories:
+      - "sponsor"
+      - "selfpromo"
+      - "interaction"
+      - "intro"
+      - "outro"
+
+logging:
+  file:
+    path: ./logs/
+  level:
+    root: INFO
+    lavalink: INFO
+    
